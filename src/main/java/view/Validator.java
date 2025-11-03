@@ -17,7 +17,7 @@ public class Validator {
     }
 
     public static void validatePurchaseAmount(int number) {
-        validateNegative(number);
+        validatePositive(number);
         validateAmountUnit(number);
     }
 
@@ -27,7 +27,7 @@ public class Validator {
         validateLottoRange(winningLotto);
     }
 
-    private static void validateNegative(int number) {
+    private static void validatePositive(int number) {
         if (number <= 0) {
             throw new IllegalArgumentException(ErrorMessage.NOT_POSITIVE_PURCHASE_AMOUNT.getMessage());
         }
