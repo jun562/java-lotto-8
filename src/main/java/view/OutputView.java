@@ -61,20 +61,23 @@ public class OutputView {
         System.out.println("---");
 
         Map<LottoRank, Integer> rankCounts = result.getRankCounts();
+        printRankDetails(rankCounts);
 
+        double profitRate = result.calculateProfitRate();
+        System.out.printf("총 수익률은 %.1f%%입니다.\n", profitRate);
+    }
+
+    private static void printRankDetails(Map<LottoRank, Integer> rankCounts) {
         for (LottoRank rank : RESULT_RANKS) {
             if (rank == LottoRank.MISS) {
                 continue;
             }
-
             String matchDescription = getMatchDescription(rank);
             String prizeMoney = formatPrizeMoney(rank.getPrizeMoney());
             int count = rankCounts.getOrDefault(rank, 0);
 
             System.out.printf("%s (%s) - %d개\n", matchDescription, prizeMoney, count);
         }
-        double profitRate = result.calculateProfitRate();
-        System.out.printf("총 수익률은 %.1f%%입니다.\n", profitRate);
     }
 
     private static String getMatchDescription(LottoRank rank) {
@@ -91,4 +94,5 @@ public class OutputView {
         DecimalFormat df = new DecimalFormat("###,###");
         return df.format(money) + "원";
     }
+
 }
