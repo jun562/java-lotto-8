@@ -28,15 +28,17 @@ public class OutputView {
     }
 
     public static void printPurchasedLottos(LottoWallet lottoWallet) {
-        for (Lotto lotto : lottoWallet.getLottos()) {
-            String formattedNumbers = lotto.getNumbers().stream().map(String::valueOf)
-                    .collect(Collectors.joining(", ", "[", "]"));
-            System.out.println(formattedNumbers);
-        }
+        lottoWallet.getLottos().forEach(OutputView::printSingleLotto);
     }
 
     public static void printError(String message) {
         System.out.println(message);
+    }
+
+    private static void printSingleLotto(Lotto lotto) {
+        String formattedNumbers = lotto.getNumbers().stream().map(String::valueOf)
+                .collect(Collectors.joining(", ", "[", "]"));
+        System.out.println(formattedNumbers);
     }
 
 }
