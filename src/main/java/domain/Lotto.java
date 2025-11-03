@@ -1,6 +1,10 @@
 package domain;
 
+import constant.ErrorMessage;
+import constant.LottoRule;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Lotto {
 
@@ -12,10 +16,30 @@ public class Lotto {
     }
 
     private void validate(List<Integer> numbers) {
-        if (numbers.size() != 6) {
-            throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+        validateCount(numbers);
+        validateDuplicated(numbers);
+        validateRange(numbers);
+    }
+
+    private void validateCount(List<Integer> numbers) {
+        if (numbers.size() != LottoRule.LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_SIZE.getMessage());
         }
     }
 
-    // TODO: 추가 기능 구현
+    private void validateDuplicated(List<Integer> numbers) {
+        Set<Integer> uniqueNumbers = new HashSet<>(numbers);
+        if (uniqueNumbers.size() != numbers.size()) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NUMBERS_IN_LOTTO.getMessage());
+        }
+    }
+
+    private void validateRange(List<Integer> numbers) {
+        boolean isOutOfRange = numbers.stream()
+                .anyMatch(number -> number < LottoRule.MIN_LOTTO_NUMBER || number > LottoRule.MAX_LOTTO_NUMBER);
+
+        if (isOutOfRange) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANGE.getMessage());
+        }
+    }
 }
