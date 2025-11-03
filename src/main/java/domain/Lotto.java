@@ -1,6 +1,7 @@
 package domain;
 
 import constant.ErrorMessage;
+import constant.LottoRank;
 import constant.LottoRule;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,6 +16,20 @@ public class Lotto {
     public Lotto(List<Integer> numbers) {
         validate(numbers);
         this.numbers = sortNumbers(numbers);
+    }
+
+    public LottoRank match(WinningLotto winningLotto) {
+        int matchCount = countMatchingNumbers(winningLotto.getLotto());
+
+        boolean bonusMatch = numbers.contains(winningLotto.getBonusNumber());
+
+        return LottoRank.valueOf(matchCount, bonusMatch);
+    }
+
+    private int countMatchingNumbers(Lotto winningNumbers) {
+        return (int) numbers.stream()
+                .filter(number -> winningNumbers.getNumbers().contains(number))
+                .count();
     }
 
     private void validate(List<Integer> numbers) {
