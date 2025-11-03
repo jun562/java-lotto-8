@@ -28,12 +28,17 @@ public class LottoResult {
     }
 
     public double calculateProfitRate() {
-        long totalPrize = calculateTotalPrizeMoney();
-        double profitRate = (double) totalPrize / (double) purchaseAmount * 100.0;
+        return roundFirstDigit(calculatePreciseProfitRate());
+    }
 
+    private double calculatePreciseProfitRate() {
+        long totalPrize = calculateTotalPrizeMoney();
+        return (double) totalPrize / (double) purchaseAmount * 100.0;
+    }
+
+    private double roundFirstDigit(double profitRate) {
         BigDecimal bigDecimal = BigDecimal.valueOf(profitRate);
         BigDecimal roundedRate = bigDecimal.setScale(1, RoundingMode.HALF_UP);
-        
         return roundedRate.doubleValue();
     }
 }
