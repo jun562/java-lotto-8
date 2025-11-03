@@ -14,9 +14,17 @@ public class WinningLotto {
     }
 
     private void validate(Lotto lotto, int bonusNumber) {
+        validateRange(bonusNumber);
+        validateDuplicated(lotto, bonusNumber);
+    }
+
+    private void validateRange(int bonusNumber) {
         if (bonusNumber < LottoRule.MIN_LOTTO_NUMBER || bonusNumber > LottoRule.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANGE.getMessage());
         }
+    }
+
+    private void validateDuplicated(Lotto lotto, int bonusNumber) {
         if (lotto.getNumbers().contains(bonusNumber)) {
             throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_NUMBER.getMessage());
         }
