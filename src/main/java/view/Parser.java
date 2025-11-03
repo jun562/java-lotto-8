@@ -20,9 +20,9 @@ public class Parser {
     }
 
     public static List<Integer> parseStringToList(String input) {
-        List<String> splitInput = List.of(input.split(DELIMITER));
-        List<String> trimmedInput = splitInput.stream().map(String::trim).toList();
         try {
+            List<String> trimmedInput = trimInput(splitInput(input));
+
             return trimmedInput.stream().map(Integer::parseInt).collect(Collectors.toList());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER_IN_LIST.getMessage());
@@ -32,4 +32,14 @@ public class Parser {
     private static String trimInput(String input) {
         return input.trim();
     }
+
+    private static List<String> splitInput(String input) {
+        return List.of(input.split(DELIMITER));
+    }
+
+    private static List<String> trimInput(List<String> input) {
+        return input.stream().map(String::trim).collect(Collectors.toList());
+    }
+
+
 }
