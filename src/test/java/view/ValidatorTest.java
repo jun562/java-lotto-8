@@ -101,4 +101,17 @@ class ValidatorTest {
 
         assertEquals(ErrorMessage.INVALID_LOTTO_RANGE.getMessage(), exception.getMessage());
     }
+
+    @Test
+    @DisplayName("보너스_번호가_당첨번호와_중복되는_경우")
+    void validateBonusNumberWhenDuplicated() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 5;
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            Validator.validateBonusNumber(bonusNumber, winningLotto);
+        });
+
+        assertEquals(ErrorMessage.DUPLICATE_BONUS_NUMBER.getMessage(), exception.getMessage());
+    }
 }
