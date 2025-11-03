@@ -1,16 +1,16 @@
 package view;
 
+import static constant.LottoRule.LOTTO_NUMBER_COUNT;
+import static constant.LottoRule.LOTTO_PRICE_UNIT;
+import static constant.LottoRule.MAX_LOTTO_NUMBER;
+import static constant.LottoRule.MIN_LOTTO_NUMBER;
+
 import constant.ErrorMessage;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Validator {
-
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int LOTTO_PRICE_UNIT = 1000;
 
     private Validator() {
 

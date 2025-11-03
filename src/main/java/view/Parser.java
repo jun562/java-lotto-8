@@ -1,12 +1,12 @@
 package view;
 
+import static constant.LottoRule.DELIMITER;
+
 import constant.ErrorMessage;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Parser {
-    
-    private static final String DELIMITER = ",";
 
     private Parser() {
 
