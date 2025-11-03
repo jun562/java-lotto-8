@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import constant.ErrorMessage;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,6 +30,17 @@ class ParserTest {
         int result = Parser.parseStringToInteger(purchaseAmount);
 
         assertEquals(1000, result);
+    }
+
+    @Test
+    @DisplayName("쉼표를_기준으로_정수형_리스트_변환")
+    void parseStringToListOfInteger() {
+        String input = "1,2,3,4,5,6";
+        List<Integer> parsedInput = List.of(1, 2, 3, 4, 5, 6);
+
+        List<Integer> result = Parser.parseStringToList(input);
+
+        assertEquals(parsedInput, result);
     }
 
     @ParameterizedTest
