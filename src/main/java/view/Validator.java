@@ -28,12 +28,8 @@ public class Validator {
     }
 
     public static void validateBonusNumber(int bonusNumber, List<Integer> winningLotto) {
-        if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANGE.getMessage());
-        }
-        if (winningLotto.contains(bonusNumber)) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_NUMBER.getMessage());
-        }
+        validateLottoRange(bonusNumber);
+        validateBonusNumberDuplicated(bonusNumber, winningLotto);
     }
 
     private static void validatePositive(int number) {
@@ -69,5 +65,15 @@ public class Validator {
         }
     }
 
+    private static void validateLottoRange(int bonusNumber) {
+        if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANGE.getMessage());
+        }
+    }
 
+    private static void validateBonusNumberDuplicated(int bonusNumber, List<Integer> winningLotto) {
+        if (winningLotto.contains(bonusNumber)) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_BONUS_NUMBER.getMessage());
+        }
+    }
 }
