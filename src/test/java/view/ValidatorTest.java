@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import constant.ErrorMessage;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -42,7 +43,16 @@ class ValidatorTest {
         });
 
         assertEquals(ErrorMessage.INVALID_PURCHASE_AMOUNT_UNIT.getMessage(), exception.getMessage());
-
-
     }
+
+    @Test
+    @DisplayName("당첨_번호가_올바른_경우")
+    void validateWhenCorrectWinningLotto() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+        
+        assertDoesNotThrow(() -> {
+            Validator.validateWinningLotto(winningLotto);
+        });
+    }
+
 }
