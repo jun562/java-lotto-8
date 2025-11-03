@@ -22,6 +22,27 @@ class ValidatorTest {
     }
 
     @Test
+    @DisplayName("당첨_번호가_올바른_경우")
+    void validateWhenCorrectWinningLotto() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+
+        assertDoesNotThrow(() -> {
+            Validator.validateWinningLotto(winningLotto);
+        });
+    }
+
+    @Test
+    @DisplayName("보너스_번호가_올바른_경우")
+    void validateWhenCorrectBonusNumber() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
+
+        assertDoesNotThrow(() -> {
+            Validator.validateBonusNumber(bonusNumber, winningLotto);
+        });
+    }
+
+    @Test
     @DisplayName("구입_금액이_음수인_경우")
     void validateWhenNegativeNumber() {
         int number = -1000;
@@ -43,16 +64,6 @@ class ValidatorTest {
         });
 
         assertEquals(ErrorMessage.INVALID_PURCHASE_AMOUNT_UNIT.getMessage(), exception.getMessage());
-    }
-
-    @Test
-    @DisplayName("당첨_번호가_올바른_경우")
-    void validateWhenCorrectWinningLotto() {
-        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
-
-        assertDoesNotThrow(() -> {
-            Validator.validateWinningLotto(winningLotto);
-        });
     }
 
     @Test
@@ -87,7 +98,7 @@ class ValidatorTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             Validator.validateWinningLotto(winningLotto);
         });
-        
+
         assertEquals(ErrorMessage.INVALID_LOTTO_RANGE.getMessage(), exception.getMessage());
     }
 }
