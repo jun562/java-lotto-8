@@ -23,6 +23,8 @@ public class LottoController {
     }
 
     private int getPurchaseAmountWithRetry() {
+        OutputView.printPurchaseAmountPrompt();
+
         while (true) {
             try {
                 String input = InputView.getPurchaseAmount();
