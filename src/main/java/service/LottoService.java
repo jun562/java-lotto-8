@@ -4,6 +4,7 @@ import constant.LottoRule;
 import domain.Lotto;
 import domain.LottoGenerator;
 import domain.LottoWallet;
+import domain.WinningLotto;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,5 +26,13 @@ public class LottoService {
             lottos.add(lottoGenerator.generate());
         }
         return new LottoWallet(lottos);
+    }
+
+    public Lotto createLotto(List<Integer> numbers) {
+        return new Lotto(numbers);
+    }
+
+    public WinningLotto createWinningLotto(Lotto winningLotto, int bonusNumber) {
+        return new WinningLotto(winningLotto, bonusNumber);
     }
 }
