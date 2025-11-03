@@ -29,4 +29,19 @@ class LottoResultTest {
 
         assertEquals(expectedTotalPrize, actualTotalPrize);
     }
+
+    @Test
+    @DisplayName("5등_1개_당첨시_수익률_62.5를_계산")
+    void calculateProfitRateWhenFifthPrize() {
+        Map<LottoRank, Integer> rankCounts = new EnumMap<>(LottoRank.class);
+        rankCounts.put(LottoRank.FIFTH, 1);
+        final int purchaseAmount = 8000;
+        final double expectedProfitRate = 62.5;
+
+        LottoResult lottoResult = new LottoResult(purchaseAmount, rankCounts);
+        double actualProfitRate = lottoResult.calculateProfitRate();
+
+        assertEquals(expectedProfitRate, actualProfitRate);
+    }
+
 }
