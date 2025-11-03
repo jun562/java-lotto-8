@@ -10,7 +10,7 @@ public class LottoGenerator {
 
     }
 
-    public Lotto Generate() {
+    public Lotto generate() {
         List<Integer> numbers = Randoms.pickUniqueNumbersInRange(
                 LottoRule.MIN_LOTTO_NUMBER,
                 LottoRule.MAX_LOTTO_NUMBER,
