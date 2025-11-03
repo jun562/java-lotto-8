@@ -49,10 +49,21 @@ class ValidatorTest {
     @DisplayName("당첨_번호가_올바른_경우")
     void validateWhenCorrectWinningLotto() {
         List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
-        
+
         assertDoesNotThrow(() -> {
             Validator.validateWinningLotto(winningLotto);
         });
     }
 
+    @Test
+    @DisplayName("당첨_번호가_6개가_아닌_경우")
+    void validateWhenNotSix() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            Validator.validateWinningLotto(winningLotto);
+        });
+
+        assertEquals(ErrorMessage.INVALID_LOTTO_SIZE.getMessage(), exception.getMessage());
+    }
 }
