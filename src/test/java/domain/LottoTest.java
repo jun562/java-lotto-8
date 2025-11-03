@@ -1,9 +1,8 @@
-package lotto;
+package domain;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import domain.Lotto;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +15,7 @@ class LottoTest {
         List<Integer> unsortedNumbers = List.of(41, 2, 7, 5, 1, 30);
 
         Lotto lotto = new Lotto(unsortedNumbers);
-        
+
         List<Integer> expectedNumbers = List.of(1, 2, 5, 7, 30, 41);
         assertEquals(lotto.getNumbers(), expectedNumbers);
     }
