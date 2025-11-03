@@ -1,0 +1,38 @@
+package controller;
+
+import service.LottoService;
+import view.InputView;
+import view.OutputView;
+import view.Parser;
+import view.Validator;
+
+public class LottoController {
+
+    private final LottoService lottoService;
+
+    public LottoController(LottoService lottoService) {
+        this.lottoService = lottoService;
+    }
+
+    public void run() {
+        int purchaseAmount = getPurchaseAmountWithRetry();
+
+        int lottoCount = lottoService.calculateLottoCount(purchaseAmount);
+
+        OutputView.printLottoCount(lottoCount);
+    }
+
+    private int getPurchaseAmountWithRetry() {
+        while (true) {
+            try {
+                String input = InputView.getPurchaseAmount();
+                int purchaseAmount = Parser.parseStringToInteger(input);
+                Validator.validatePurchaseAmount(purchaseAmount);
+
+                return purchaseAmount;
+            } catch (IllegalArgumentException e) {
+                OutputView.printError(e.getMessage());
+            }
+        }
+    }
+}
