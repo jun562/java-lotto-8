@@ -1,11 +1,7 @@
 package view;
 
-import static constant.LottoRule.LOTTO_NUMBER_COUNT;
-import static constant.LottoRule.LOTTO_PRICE_UNIT;
-import static constant.LottoRule.MAX_LOTTO_NUMBER;
-import static constant.LottoRule.MIN_LOTTO_NUMBER;
-
 import constant.ErrorMessage;
+import constant.LottoRule;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,13 +35,13 @@ public class Validator {
     }
 
     private static void validateAmountUnit(int number) {
-        if (number % LOTTO_PRICE_UNIT != 0) {
+        if (number % LottoRule.LOTTO_PRICE_UNIT != 0) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_PURCHASE_AMOUNT_UNIT.getMessage());
         }
     }
 
     private static void validateLottoSize(List<Integer> winningLotto) {
-        if (winningLotto.size() != LOTTO_NUMBER_COUNT) {
+        if (winningLotto.size() != LottoRule.LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_SIZE.getMessage());
         }
     }
@@ -59,14 +55,14 @@ public class Validator {
 
     private static void validateLottoRange(List<Integer> winningLotto) {
         boolean isOutOfRange = winningLotto.stream()
-                .anyMatch(number -> number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER);
+                .anyMatch(number -> number < LottoRule.MIN_LOTTO_NUMBER || number > LottoRule.MAX_LOTTO_NUMBER);
         if (isOutOfRange) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANGE.getMessage());
         }
     }
 
     private static void validateLottoRange(int bonusNumber) {
-        if (bonusNumber < MIN_LOTTO_NUMBER || bonusNumber > MAX_LOTTO_NUMBER) {
+        if (bonusNumber < LottoRule.MIN_LOTTO_NUMBER || bonusNumber > LottoRule.MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANGE.getMessage());
         }
     }

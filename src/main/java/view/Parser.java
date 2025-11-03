@@ -1,8 +1,7 @@
 package view;
 
-import static constant.LottoRule.DELIMITER;
-
 import constant.ErrorMessage;
+import constant.LottoRule;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +34,7 @@ public class Parser {
     }
 
     private static List<String> splitInput(String input) {
-        return List.of(input.split(DELIMITER));
+        return List.of(input.split(LottoRule.DELIMITER));
     }
 
     private static List<String> trimInput(List<String> input) {
