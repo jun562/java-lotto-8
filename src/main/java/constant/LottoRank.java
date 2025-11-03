@@ -24,6 +24,10 @@ public enum LottoRank {
         if (matchCount == 5 && bonusMatch) {
             return SECOND;
         }
+        return findRankByMatchCount(matchCount);
+    }
+
+    private static LottoRank findRankByMatchCount(int matchCount) {
         if (matchCount == 5) {
             return THIRD;
         }
