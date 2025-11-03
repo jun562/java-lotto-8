@@ -114,4 +114,17 @@ class ValidatorTest {
 
         assertEquals(ErrorMessage.DUPLICATE_BONUS_NUMBER.getMessage(), exception.getMessage());
     }
+
+    @Test
+    @DisplayName("보너스_번호가_범위를_벗어나는_경우")
+    void validateBonusNumberWhenOutOfRange() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 51;
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            Validator.validateBonusNumber(bonusNumber, winningLotto);
+        });
+
+        assertEquals(ErrorMessage.INVALID_LOTTO_RANGE.getMessage(), exception.getMessage());
+    }
 }
