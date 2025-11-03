@@ -1,6 +1,8 @@
 package domain;
 
 import constant.LottoRank;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Map;
 
 public class LottoResult {
@@ -23,5 +25,15 @@ public class LottoResult {
             totalPrize += rank.getPrizeMoney() * count;
         }
         return totalPrize;
+    }
+
+    public double calculateProfitRate() {
+        long totalPrize = calculateTotalPrizeMoney();
+        double profitRate = (double) totalPrize / (double) purchaseAmount * 100.0;
+
+        BigDecimal bigDecimal = BigDecimal.valueOf(profitRate);
+        BigDecimal roundedRate = bigDecimal.setScale(1, RoundingMode.HALF_UP);
+        
+        return roundedRate.doubleValue();
     }
 }
