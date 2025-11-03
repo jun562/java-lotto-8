@@ -66,4 +66,16 @@ class ValidatorTest {
 
         assertEquals(ErrorMessage.INVALID_LOTTO_SIZE.getMessage(), exception.getMessage());
     }
+
+    @Test
+    @DisplayName("당첨_번호가_중복되는_경우")
+    void validateWhenDuplicated() {
+        List<Integer> winningLotto = List.of(1, 2, 3, 4, 5, 5);
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            Validator.validateWinningLotto(winningLotto);
+        });
+
+        assertEquals(ErrorMessage.DUPLICATE_NUMBERS_IN_LOTTO.getMessage(), exception.getMessage());
+    }
 }
