@@ -29,6 +29,7 @@ public class OutputView {
 
     public static void printPurchasedLottos(LottoWallet lottoWallet) {
         lottoWallet.getLottos().forEach(OutputView::printSingleLotto);
+        System.out.println();
     }
 
     public static void printError(String message) {
