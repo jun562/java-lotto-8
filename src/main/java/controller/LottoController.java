@@ -1,5 +1,6 @@
 package controller;
 
+import domain.LottoWallet;
 import service.LottoService;
 import view.InputView;
 import view.OutputView;
@@ -18,8 +19,10 @@ public class LottoController {
         int purchaseAmount = getPurchaseAmountWithRetry();
 
         int lottoCount = lottoService.calculateLottoCount(purchaseAmount);
-
         OutputView.printLottoCount(lottoCount);
+
+        LottoWallet lottoWallet = lottoService.generateLottoWallet(lottoCount);
+        OutputView.printPurchasedLottos(lottoWallet);
     }
 
     private int getPurchaseAmountWithRetry() {
