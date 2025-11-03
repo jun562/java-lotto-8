@@ -41,4 +41,8 @@ public class LottoResult {
         BigDecimal roundedRate = bigDecimal.setScale(1, RoundingMode.HALF_UP);
         return roundedRate.doubleValue();
     }
+
+    public Map<LottoRank, Integer> getRankCounts() {
+        return rankCounts;
+    }
 }
