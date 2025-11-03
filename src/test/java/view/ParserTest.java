@@ -43,6 +43,32 @@ class ParserTest {
         assertEquals(parsedInput, result);
     }
 
+    @Test
+    @DisplayName("쉼표_사이에_공백이_존재하는_경우_정수형_리스트_변환")
+    void parseStringToListOfIntegerWithWhiteSpace() {
+        String input = "1, 2, 3 ,4 ,5, 6";
+        List<Integer> parsedInput = List.of(1, 2, 3, 4, 5, 6);
+
+        List<Integer> result = Parser.parseStringToList(input);
+
+        assertEquals(parsedInput, result);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "1,2,3,!,4,5",
+            "@@@",
+            "1,,,3"
+    })
+    @DisplayName("쉼표를_기준으로_숫자가_아닌_값이_포함된_경우")
+    void parseStringtoListOfIntegerWhenNotNumber(String input) {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> Parser.parseStringToList(input)
+        );
+
+        assertEquals(ErrorMessage.NOT_NUMBER_IN_LIST.getMessage(), exception.getMessage());
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {
             "abc", // 숫자가 아닌 문자열인 경우
