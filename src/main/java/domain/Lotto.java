@@ -2,9 +2,11 @@ package domain;
 
 import constant.ErrorMessage;
 import constant.LottoRule;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -12,13 +14,17 @@ public class Lotto {
 
     public Lotto(List<Integer> numbers) {
         validate(numbers);
-        this.numbers = numbers;
+        this.numbers = sortNumbers(numbers);
     }
 
     private void validate(List<Integer> numbers) {
         validateCount(numbers);
         validateDuplicated(numbers);
         validateRange(numbers);
+    }
+
+    private List<Integer> sortNumbers(List<Integer> numbers) {
+        return numbers.stream().sorted().collect(Collectors.toList());
     }
 
     private void validateCount(List<Integer> numbers) {
@@ -41,5 +47,9 @@ public class Lotto {
         if (isOutOfRange) {
             throw new IllegalArgumentException(ErrorMessage.INVALID_LOTTO_RANGE.getMessage());
         }
+    }
+
+    public List<Integer> getNumbers() {
+        return Collections.unmodifiableList(numbers);
     }
 }
