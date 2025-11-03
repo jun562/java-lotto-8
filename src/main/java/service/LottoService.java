@@ -1,12 +1,15 @@
 package service;
 
+import constant.LottoRank;
 import constant.LottoRule;
 import domain.Lotto;
 import domain.LottoGenerator;
+import domain.LottoResult;
 import domain.LottoWallet;
 import domain.WinningLotto;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class LottoService {
 
@@ -34,5 +37,11 @@ public class LottoService {
 
     public WinningLotto createWinningLotto(Lotto winningLotto, int bonusNumber) {
         return new WinningLotto(winningLotto, bonusNumber);
+    }
+
+    public LottoResult calculateResult(LottoWallet wallet, WinningLotto winningLotto, int purchaseAmount) {
+        Map<LottoRank, Integer> rankCounts = wallet.calculateRanks(winningLotto);
+
+        return new LottoResult(purchaseAmount, rankCounts);
     }
 }
