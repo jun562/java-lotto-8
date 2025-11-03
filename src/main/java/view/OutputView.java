@@ -19,7 +19,7 @@ public class OutputView {
             LottoRank.SECOND,
             LottoRank.FIRST
     );
-    
+
     private OutputView() {
 
     }
@@ -29,11 +29,11 @@ public class OutputView {
     }
 
     public static void printWinningNumbersPrompt() {
-        System.out.println("당첨 번호를 입력해 주세요.");
+        System.out.println("\n당첨 번호를 입력해 주세요.");
     }
 
     public static void printBonusNumberPrompt() {
-        System.out.println("보너스 번호를 입력해 주세요.");
+        System.out.println("\n보너스 번호를 입력해 주세요.");
     }
 
     public static void printLottoCount(int lottoCount) {
@@ -43,7 +43,6 @@ public class OutputView {
 
     public static void printPurchasedLottos(LottoWallet lottoWallet) {
         lottoWallet.getLottos().forEach(OutputView::printSingleLotto);
-        System.out.println();
     }
 
     public static void printError(String message) {
