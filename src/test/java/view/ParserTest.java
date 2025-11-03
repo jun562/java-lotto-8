@@ -13,21 +13,21 @@ import org.junit.jupiter.params.provider.ValueSource;
 class ParserTest {
 
     @Test
-    @DisplayName("로또_구입_금액을_정수로_변환하는_테스트")
+    @DisplayName("문자열을_정수로_변환하는_테스트")
     void parseInputToInteger() {
-        String purchaseAmount = "1000";
+        String input = "1000";
 
-        int result = Parser.parseStringToInteger(purchaseAmount);
+        int result = Parser.parseStringToInteger(input);
 
         assertEquals(1000, result);
     }
 
     @Test
-    @DisplayName("로또_구입_금액에_공백이_포함된_경우")
+    @DisplayName("문자열에_공백이_포함된_경우")
     void parseStringToIntegerWithWhiteSpace() {
-        String purchaseAmount = " 1000 ";
+        String input = " 1000 ";
 
-        int result = Parser.parseStringToInteger(purchaseAmount);
+        int result = Parser.parseStringToInteger(input);
 
         assertEquals(1000, result);
     }
@@ -56,6 +56,20 @@ class ParserTest {
 
     @ParameterizedTest
     @ValueSource(strings = {
+            "abc", // 숫자가 아닌 문자열인 경우
+            "1000.123", // 실수인 경우
+    })
+    @DisplayName("문자열이_숫자가_아닌_경우")
+    void parseStringToIntegerWhenNotInteger(String input) {
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            Parser.parseStringToInteger(input);
+        });
+
+        assertEquals(ErrorMessage.NON_NUMERIC.getMessage(), exception.getMessage());
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {
             "1,2,3,!,4,5",
             "@@@",
             "1,,,3"
@@ -67,19 +81,5 @@ class ParserTest {
         );
 
         assertEquals(ErrorMessage.NOT_NUMBER_IN_LIST.getMessage(), exception.getMessage());
-    }
-
-    @ParameterizedTest
-    @ValueSource(strings = {
-            "abc", // 숫자가 아닌 문자열인 경우
-            "1000.123", // 실수인 경우
-    })
-    @DisplayName("로또_구입_금액이_숫자가_아닌_경우")
-    void parseStringToIntegerWhenNotInteger(String purchaseAmount) {
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            Parser.parseStringToInteger(purchaseAmount);
-        });
-
-        assertEquals(ErrorMessage.NON_NUMERIC.getMessage(), exception.getMessage());
     }
 }
