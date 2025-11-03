@@ -29,6 +29,20 @@ class ValidatorTest {
             Validator.validatePurchaseAmount(number);
         });
 
-        assertEquals(ErrorMessage.NOT_POSITIVE_AMOUNT.getMessage(), exception.getMessage());
+        assertEquals(ErrorMessage.NOT_POSITIVE_PURCHASE_AMOUNT.getMessage(), exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("구입_금액이_1000원_단위가_아닌_경우")
+    void validateWhenNotMultipleOf1000() {
+        int number = 1500;
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            Validator.validatePurchaseAmount(number);
+        });
+
+        assertEquals(ErrorMessage.INVALID_PURCHASE_AMOUNT_UNIT.getMessage(), exception.getMessage());
+
+
     }
 }
