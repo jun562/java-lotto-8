@@ -1,5 +1,9 @@
 package view;
 
+import domain.Lotto;
+import domain.LottoWallet;
+import java.util.stream.Collectors;
+
 public class OutputView {
 
     private OutputView() {
@@ -23,7 +27,16 @@ public class OutputView {
         System.out.println(lottoCount + "개를 구매했습니다.");
     }
 
+    public static void printPurchasedLottos(LottoWallet lottoWallet) {
+        for (Lotto lotto : lottoWallet.getLottos()) {
+            String formattedNumbers = lotto.getNumbers().stream().map(String::valueOf)
+                    .collect(Collectors.joining(", ", "[", "]"));
+            System.out.println(formattedNumbers);
+        }
+    }
+
     public static void printError(String message) {
         System.out.println(message);
     }
+
 }
