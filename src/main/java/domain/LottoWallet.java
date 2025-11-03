@@ -18,16 +18,26 @@ public class LottoWallet {
      * Map <등수, 당첨 개수>
      */
     public Map<LottoRank, Integer> calculateRanks(WinningLotto winningLotto) {
+        Map<LottoRank, Integer> rankCounts = initializeRankMap();
+
+        processLottoMatches(winningLotto, rankCounts);
+
+        return rankCounts;
+    }
+    
+    private Map<LottoRank, Integer> initializeRankMap() {
         Map<LottoRank, Integer> rankCounts = new EnumMap<>(LottoRank.class);
-        // ENUM의 등수 상수 반환
         for (LottoRank rank : LottoRank.values()) {
             rankCounts.put(rank, 0);
         }
+        return rankCounts;
+    }
+
+    private void processLottoMatches(WinningLotto winningLotto, Map<LottoRank, Integer> rankCounts) {
         for (Lotto lotto : lottos) {
             LottoRank rank = lotto.match(winningLotto);
             rankCounts.put(rank, rankCounts.get(rank) + 1);
         }
-        return rankCounts;
     }
 
     public List<Lotto> getLottos() {
