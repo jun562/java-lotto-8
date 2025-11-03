@@ -12,6 +12,14 @@ import java.util.stream.Collectors;
 
 public class OutputView {
 
+    private static final List<LottoRank> RESULT_RANKS = Arrays.asList(
+            LottoRank.FIFTH,
+            LottoRank.FOURTH,
+            LottoRank.THIRD,
+            LottoRank.SECOND,
+            LottoRank.FIRST
+    );
+    
     private OutputView() {
 
     }
@@ -47,14 +55,6 @@ public class OutputView {
                 .collect(Collectors.joining(", ", "[", "]"));
         System.out.println(formattedNumbers);
     }
-
-    private static final List<LottoRank> RESULT_RANKS = Arrays.asList(
-            LottoRank.FIFTH,
-            LottoRank.FOURTH,
-            LottoRank.THIRD,
-            LottoRank.SECOND,
-            LottoRank.FIRST
-    );
 
     public static void printLottoResult(LottoResult result) {
         System.out.println("\n당첨 통계");
