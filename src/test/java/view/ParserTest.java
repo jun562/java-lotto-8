@@ -16,4 +16,14 @@ class ParserTest {
 
         assertEquals(1000, result);
     }
+
+    @Test
+    @DisplayName("로또_구입_금액에_공백이_포함된_경우")
+    void parseStringToIntegerWithWhiteSpace() {
+        String purchaseAmount = " 1000 ";
+
+        int result = Parser.parseStringToInteger(purchaseAmount);
+
+        assertEquals(1000, result);
+    }
 }
