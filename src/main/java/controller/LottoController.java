@@ -27,14 +27,20 @@ public class LottoController {
 
         while (true) {
             try {
-                String input = InputView.getPurchaseAmount();
-                int purchaseAmount = Parser.parseStringToInteger(input);
-                Validator.validatePurchaseAmount(purchaseAmount);
-
-                return purchaseAmount;
+                return processPurchaseAmount();
             } catch (IllegalArgumentException e) {
                 OutputView.printError(e.getMessage());
             }
         }
+    }
+
+    /**
+     * 사용자 입력 파싱 및 검증 헬퍼 메서드
+     */
+    private int processPurchaseAmount() {
+        String input = InputView.getPurchaseAmount();
+        int purchaseAmount = Parser.parseStringToInteger(input);
+        Validator.validatePurchaseAmount(purchaseAmount);
+        return purchaseAmount;
     }
 }
